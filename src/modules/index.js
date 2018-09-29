@@ -21,7 +21,7 @@ export default function(state = initialState, { type, payload }) {
     case FETCH_ALL_QUOTES + SUCCESS:
       return {
         ...state,
-        data: payload,
+        data: payload.quotes,
         loading: false,
       }
     case FETCH_ALL_QUOTES + ERROR:
