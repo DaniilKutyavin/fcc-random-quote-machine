@@ -1,10 +1,10 @@
 {
   "extends": [
-    "react",
+    "react-app",
     "prettier"
   ],
   "plugins": [
-    "pretter"
+    "prettier"
   ],
   "rules": {
     "jsx-quotes": [
