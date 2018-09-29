@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "react",
+    "prettier"
+  ],
+  "plugins": [
+    "pretter"
+  ],
+  "rules": {
+    "jsx-quotes": [
+      1,
+      "prefer-double"
+    ]
+  }
+}
