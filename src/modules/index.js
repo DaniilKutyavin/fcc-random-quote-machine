@@ -36,6 +36,7 @@ export default function(state = initialState, { type, payload }) {
 
 /* action creators */
 export function fetchAllQuotes(url, options) {
+  console.log(url, ' ', options)
   return {
     type: FETCH_ALL_QUOTES,
     fetch: {
