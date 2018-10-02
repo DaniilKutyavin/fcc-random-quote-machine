@@ -9,6 +9,13 @@ class App extends React.PureComponent {
       'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
     this.props.fetchAllQuotes(url)
   }
+  tweetClkHandle = () => {
+    const {
+      quote: { quote: text, author },
+    } = this.props
+    const tweet = `"${text}" ${author}`
+    window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank')
+  }
   render() {
     const {
       quote: { quote: text, author },
@@ -23,10 +30,14 @@ class App extends React.PureComponent {
           <div id="quote-box">
             <p id="text">{text}</p>
             <small id="author">{author}</small>
-            <button id="new-quote" onClick={() => fetchAllQuotes()}>
-              Get quote
-            </button>
-            <button id="tweet-quote">Tweet quote</button>
+            <div>
+              <button id="new-quote" onClick={() => fetchAllQuotes()}>
+                Get quote
+              </button>
+              <button id="tweet-quote" onClick={this.tweetClkHandle}>
+                Tweet quote
+              </button>
+            </div>
           </div>
         )}
       </div>
