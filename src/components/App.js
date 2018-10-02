@@ -13,6 +13,7 @@ class App extends React.PureComponent {
     const {
       quote: { quote: text, author },
       loading,
+      fetchAllQuotes,
     } = this.props
     return (
       <div id="app">
@@ -22,7 +23,9 @@ class App extends React.PureComponent {
           <div id="quote-box">
             <p id="text">{text}</p>
             <small id="author">{author}</small>
-            <button id="new-quote">Get quote</button>
+            <button id="new-quote" onClick={() => fetchAllQuotes()}>
+              Get quote
+            </button>
             <button id="tweet-quote">Tweet quote</button>
           </div>
         )}
@@ -32,7 +35,15 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  quote: state.currentQuote,
+  quote: state.data.reduce((acc, cur, curIndex, arr) => {
+    if (curIndex === 0) {
+      acc.push(Math.round(Math.random() * (arr.length - 1)))
+    }
+    if (curIndex === acc[0]) {
+      acc.push(cur)
+    }
+    return acc
+  }, [])[1],
   loading: state.loading,
 })
 

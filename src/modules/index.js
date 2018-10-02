@@ -5,7 +5,12 @@ import { REQUEST, SUCCESS, ERROR } from '../middlewares'
 const FETCH_ALL_QUOTES = `${appname}/FETCH_ALL_QUOTES`
 
 const initialState = {
-  data: [],
+  data: [
+    {
+      quote: '',
+      author: '',
+    },
+  ],
   currentQuote: {},
   loading: false,
 }
@@ -36,7 +41,6 @@ export default function(state = initialState, { type, payload }) {
 
 /* action creators */
 export function fetchAllQuotes(url, options) {
-  console.log(url, ' ', options)
   return {
     type: FETCH_ALL_QUOTES,
     fetch: {
