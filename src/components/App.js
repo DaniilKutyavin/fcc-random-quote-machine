@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchAllQuotes } from '../modules'
+import { fetchAllQuotes, getRandomQuote } from '../modules'
 import './App.css'
 
 class App extends React.PureComponent {
@@ -9,6 +9,14 @@ class App extends React.PureComponent {
       'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
     this.props.fetchAllQuotes(url)
   }
+
+  componentDidUpdate = prevProps => {
+    if (this.props.loading !== prevProps.loading) {
+      console.log('Loading updated')
+      this.props.getRandomQuote()
+    }
+  }
+
   tweetClkHandle = () => {
     const {
       quote: { quote: text, author },
@@ -20,7 +28,7 @@ class App extends React.PureComponent {
     const {
       quote: { quote: text, author },
       loading,
-      fetchAllQuotes,
+      getRandomQuote,
     } = this.props
     return (
       <div id="app">
@@ -31,7 +39,7 @@ class App extends React.PureComponent {
             <p id="text">{text}</p>
             <small id="author">{author}</small>
             <div>
-              <button id="new-quote" onClick={() => fetchAllQuotes()}>
+              <button id="new-quote" onClick={() => getRandomQuote()}>
                 Get quote
               </button>
               <button id="tweet-quote" onClick={this.tweetClkHandle}>
@@ -46,19 +54,11 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  quote: state.data.reduce((acc, cur, curIndex, arr) => {
-    if (curIndex === 0) {
-      acc.push(Math.round(Math.random() * (arr.length - 1)))
-    }
-    if (curIndex === acc[0]) {
-      acc.push(cur)
-    }
-    return acc
-  }, [])[1],
+  quote: state.currentQuote,
   loading: state.loading,
 })
 
 export default connect(
   mapStateToProps,
-  { fetchAllQuotes }
+  { fetchAllQuotes, getRandomQuote }
 )(App)

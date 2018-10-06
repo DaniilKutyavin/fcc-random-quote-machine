@@ -1,8 +1,12 @@
 import { name as appname } from '../../package.json'
+import { REQUEST, SUCCESS, ERROR } from '../middlewares'
+
+const namespace = 'quotes'
+const prefix = `${appname}/${namespace}`
 
 /* Action types  */
-import { REQUEST, SUCCESS, ERROR } from '../middlewares'
-const FETCH_ALL_QUOTES = `${appname}/FETCH_ALL_QUOTES`
+const FETCH_ALL_QUOTES = `${prefix}/FETCH_ALL_QUOTES`
+const GET_RANDOM_QUOTE = `${prefix}/GET_RANDOM_QUOTE`
 
 const initialState = {
   data: [
@@ -34,6 +38,11 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         loading: false,
       }
+    case GET_RANDOM_QUOTE:
+      return {
+        ...state,
+        currentQuote: state.data[Math.floor(Math.random() * state.data.length)],
+      }
     default:
       return state
   }
@@ -47,5 +56,11 @@ export function fetchAllQuotes(url, options) {
       url,
       options,
     },
+  }
+}
+
+export function getRandomQuote(arrLen) {
+  return {
+    type: GET_RANDOM_QUOTE,
   }
 }
