@@ -122,6 +122,11 @@ body, html{
     1px -1px 0 #414A4C,
     -1px 1px 0 #414A4C,
     1px 1px 0 #414A4C;
+  transition: opacity linear 0.1s;
+}
+
+#new-quote:hover {
+  opacity: 1;
 }
 
 #tweet-quote {
