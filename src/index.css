@@ -6,25 +6,28 @@ html, button {
   color: #414A4C ;
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 body, html{
   margin: 0;
   padding: 0;  
+  height: 100%;
 }
 
 #app {
   position: absolute;
   top: 0;
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
   transition: background-color 0.2s linear;
 }
 
-/* App background colors */
-.aquamarine {
-  background-color: aquamarine;
-}
+/* #app and #new-quote button background colors */
 .blueviolet {
   background-color: blueviolet;
 }
@@ -42,9 +45,6 @@ body, html{
 }
 .indigo {
   background-color: indigo;
-}
-.khaki {
-  background-color: khaki;
 }
 .lightcoral {
   background-color: lightcoral;
@@ -66,13 +66,17 @@ body, html{
 
 #quote-box {
   position: relative;
-  top: 50%;
-  margin: -10% auto;
+  padding: auto;
+  /* phones only */
+  top: 20px;
+  min-height: 80%;
+
   width: 35%;
-  min-height: 200px;
+  min-width: 310px;
+  margin: auto;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
-  padding-bottom: 68px; /* #buttons height + #author font-size */
+  padding-bottom: 64px; /* #buttons height + #author font-size */
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
 }
 
@@ -84,17 +88,17 @@ body, html{
 }
 
 #text {
-  font-size: 26px;
+  font-size: 22px; /* phones only */
 }
 
 #quote-box #author {
-  font-size: 18px;
+  font-size: 14px; /* phones only */
   font-style: italic;
   text-align: right;
   margin-right: 30px;
   position: absolute;
-  height: 18px; /* font-size */
-  bottom: 68px; /* #buttons height */
+  height: 14px; /* font-size */
+  bottom: 64px; /* #buttons height + this height */
 }
 
 #buttons {
@@ -122,6 +126,11 @@ body, html{
     1px -1px 0 #414A4C,
     -1px 1px 0 #414A4C,
     1px 1px 0 #414A4C;
+  transition: opacity linear 0.1s;
+}
+
+#new-quote:focus, #new-quote:hover {
+  opacity: 1;
 }
 
 #tweet-quote {
@@ -132,7 +141,22 @@ body, html{
   transition-duration: 0.1s;
 }
 
-#tweet-quote:hover {
+#tweet-quote:hover, #tweet-quote:focus {
   color: #f5f8fa;
   background-color: #55acee;
+}
+
+@media only screen and (min-width : 768px) {
+  #quote-box {
+    top: 15%;
+    min-height: 200px;
+    padding-bottom: 68px;
+  }
+  #text {
+    font-size: 26px;
+  }
+  #author {
+    font-size: 18px;
+    height: 18px;
+  }
 }
