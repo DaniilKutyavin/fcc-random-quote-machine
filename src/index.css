@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Corben');
 
+/* Fonts common settings */
+html, button {
+  font-family: 'Corben', cursive;
+  color: #414A4C ;
+}
+
 body, html{
   margin: 0;
-  padding: 0;
-  font-family: 'Corben', cursive;
+  padding: 0;  
 }
 
 #app {
@@ -13,71 +18,121 @@ body, html{
   padding: 0;
   width: 100vw;
   height: 100vh;
-  transition: background-color linear 0.2s;
+  transition: background-color 0.2s linear;
 }
 
-#app.aquamarine {
+/* App background colors */
+.aquamarine {
   background-color: aquamarine;
 }
-
-#app.blueviolet {
+.blueviolet {
   background-color: blueviolet;
 }
-
-#app.chocolate {
+.chocolate {
   background-color: chocolate;
 }
-
-#app.darkcyan {
+.darkcyan {
   background-color: darkcyan;
 }
-
-#app.forestgreen {
+.forestgreen {
   background-color: forestgreen;
 }
-
-#app.indianred {
+.indianred {
   background-color: indianred;
 }
-
-#app.indigo {
+.indigo {
   background-color: indigo;
 }
-
-#app.khaki {
+.khaki {
   background-color: khaki;
 }
-
-#app.lightcoral {
+.lightcoral {
   background-color: lightcoral;
 }
-
-#app.mediumseagreen {
+.mediumseagreen {
   background-color: mediumseagreen;
 }
-
-#app.salmon {
+.salmon {
   background-color: salmon;
 }
-
-#app.sandybrown {
+.sandybrown {
   background-color: sandybrown;
 }
-
-#app.sienna {
+.sienna {
   background-color: sienna;
 }
+
+/* Quote box */
 
 #quote-box {
   position: relative;
   top: 50%;
-  margin: -200px auto;
+  margin: -10% auto;
   width: 35%;
-  height: 300px;
+  min-height: 200px;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
+  padding-bottom: 68px; /* #buttons height + #author font-size */
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+}
+
+#text, 
+#author {
+  display: block;
+  width: 95%;
+  margin: auto;
 }
 
 #text {
-  font-size: 25px;
+  font-size: 26px;
+}
+
+#quote-box #author {
+  font-size: 18px;
+  font-style: italic;
+  text-align: right;
+  margin-right: 30px;
+  position: absolute;
+  height: 18px; /* font-size */
+  bottom: 68px; /* #buttons height */
+}
+
+#buttons {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+}
+
+#buttons button {
+  height: 100%;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+}
+
+#new-quote {
+  color: white;
+  opacity: 0.8;
+  float: right;
+  border-bottom-right-radius: 15px;
+  text-shadow:
+    -1px -1px 0 #414A4C,
+    1px -1px 0 #414A4C,
+    -1px 1px 0 #414A4C,
+    1px 1px 0 #414A4C;
+}
+
+#tweet-quote {
+  background-color: rgba(255, 255, 255, 0); /* #quote-box border-color */
+  border-bottom-left-radius: 15px;
+  transition-property: color background-color;
+  transition-timing-function: linear;
+  transition-duration: 0.1s;
+}
+
+#tweet-quote:hover {
+  color: #f5f8fa;
+  background-color: #55acee;
 }

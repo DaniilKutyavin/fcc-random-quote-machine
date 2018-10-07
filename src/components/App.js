@@ -39,14 +39,21 @@ class App extends React.PureComponent {
           <h1>Loading...</h1>
         ) : (
           <div id="quote-box">
-            <p id="text">{text}</p>
-            <small id="author">{author}</small>
-            <div>
-              <button id="new-quote" onClick={() => getRandomQuote()}>
-                Get quote
-              </button>
+            <p id="text">
+              &ldquo;
+              {text}
+              &rdquo;
+            </p>
+            <p id="author">{author}</p>
+            <div id="buttons">
               <button id="tweet-quote" onClick={this.tweetClkHandle}>
                 Tweet quote
+              </button>
+              <button
+                id="new-quote"
+                className={this.props.color}
+                onClick={() => getRandomQuote()}>
+                New quote
               </button>
             </div>
           </div>
