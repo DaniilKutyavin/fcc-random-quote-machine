@@ -30,12 +30,19 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case CHANGE_BG_COLOR:
+      const getColor = (curColor, colors) => {
+        let newColor
+        do {
+          newColor = colors[Math.floor(Math.random() * (colors.length - 1))]
+        } while (newColor === curColor)
+        return newColor
+      }
       return {
         ...state,
-        currentColorClass:
-          state.possibleColorClasses[
-            Math.floor(Math.random() * (state.possibleColorClasses.length - 1))
-          ],
+        currentColorClass: getColor(
+          state.currentColorClass,
+          state.possibleColorClasses
+        ),
       }
     default:
       return state
