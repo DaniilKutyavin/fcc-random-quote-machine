@@ -10,14 +10,12 @@ const CHANGE_BG_COLOR = `${prefix}/CHANGE_BG_COLOR`
 
 const initialState = {
   possibleColorClasses: [
-    'aquamarine',
     'blueviolet',
     'chocolate',
     'darkcyan',
     'forestgreen',
     'indianred',
     'indigo',
-    'khaki',
     'lightcoral',
     'mediumseagreen',
     'salmon',
