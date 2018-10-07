@@ -1,19 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchAllQuotes, getRandomQuote } from '../modules'
-import './App.css'
+import { fetchAllQuotes, getRandomQuote } from '../modules/quotes'
+import { changeBgColor } from '../modules/ui'
 
 class App extends React.PureComponent {
   componentDidMount = () => {
     const url =
       'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
     this.props.fetchAllQuotes(url)
+    this.props.changeBgColor()
   }
 
   componentDidUpdate = prevProps => {
     if (this.props.loading !== prevProps.loading) {
-      console.log('Loading updated')
       this.props.getRandomQuote()
+    }
+    if (this.props.quote !== prevProps.quote) {
+      this.props.changeBgColor()
     }
   }
 
@@ -31,7 +34,7 @@ class App extends React.PureComponent {
       getRandomQuote,
     } = this.props
     return (
-      <div id="app">
+      <div id="app" className={this.props.color}>
         {loading ? (
           <h1>Loading...</h1>
         ) : (
@@ -54,11 +57,12 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  quote: state.currentQuote,
-  loading: state.loading,
+  quote: state.quotes.currentQuote,
+  loading: state.quotes.loading,
+  color: state.ui.currentColorClass,
 })
 
 export default connect(
   mapStateToProps,
-  { fetchAllQuotes, getRandomQuote }
+  { fetchAllQuotes, getRandomQuote, changeBgColor }
 )(App)
