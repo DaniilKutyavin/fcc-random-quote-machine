@@ -1,28 +1,51 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { fetchAllQuotes, getRandomQuote } from '../modules/quotes'
 import { changeBgColor } from '../modules/ui'
+import { getQuotes } from '../utils'
 
 function App(props) {
-  const { loading, fetchAllQuotes, changeBgColor, quote, getRandomQuote, color } = props
-  const { quote: text, author } = quote
+  const [quotes, setQuotes] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [currentQuote, setCurrentQuote] = useState()
+
+  const { changeBgColor, color } = props
 
   useEffect(
     () => {
-      const url =
-        'https://gist.githubusercontent.com/DaniilKutyavin/0d335200fcbbee1fc5337d164e801c1d/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json'
-      fetchAllQuotes(url)
+      const onMount = async () => {
+        try {
+          setLoading(true)
+          const quotes = await getQuotes()
+          setQuotes(quotes.quotes)
+          setCurrentQuote(quotes.quotes[0])
+        } catch (err) {
+          console.error(err)
+        } finally {
+          setLoading(false)
+        }
+      }
+
+      onMount()
       changeBgColor()
     },
-    [fetchAllQuotes, changeBgColor]
+    [changeBgColor]
   )
+
+  if (loading) return <Loading />
+  if (!currentQuote) return null
+
+  const { quote: text, author } = currentQuote
 
   const tweetClkHandle = () => {
     const tweet = `"${text}" ${author}`
     window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank')
   }
 
-  if (loading) return <Loading />
+  const getRandomQuote = () => {
+    const newIndex = Math.floor(Math.random() * (quotes.length - 1))
+    setCurrentQuote(quotes[newIndex])
+    changeBgColor()
+  }
 
   return (
     <div id="app" className={color}>
@@ -50,13 +73,9 @@ function Loading() {
   return <h1>Loading...</h1>
 }
 
-const mapStateToProps = state => ({
-  quote: state.quotes.currentQuote,
-  loading: state.quotes.loading,
-  color: state.ui.currentColorClass,
-})
-
 export default connect(
-  mapStateToProps,
-  { fetchAllQuotes, getRandomQuote, changeBgColor }
+  state => ({
+    color: state.ui.currentColorClass,
+  }),
+  { changeBgColor }
 )(App)
