@@ -5,6 +5,8 @@ import { changeBgColor } from '../modules/ui'
 
 function App(props) {
   const { loading, fetchAllQuotes, changeBgColor, quote, getRandomQuote, color } = props
+  const { quote: text, author } = quote
+
   useEffect(
     () => {
       const url =
@@ -16,11 +18,9 @@ function App(props) {
   )
 
   const tweetClkHandle = () => {
-    const { quote: text, author } = quote
     const tweet = `"${text}" ${author}`
     window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank')
   }
-  const { quote: text, author } = quote
 
   if (loading) return <Loading />
 
