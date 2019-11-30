@@ -1,8 +1,9 @@
 import React from 'react'
 
 import './Card.scss'
+import Button from '../button/Button'
 
-export default function Card({ text, author, onNewQuoteClick, color }) {
+export default function Card({ text, author, onNewQuoteClick }) {
   const tweetClkHandle = () => {
     const tweet = `"${text}" ${author}`
     window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank')
@@ -18,14 +19,14 @@ export default function Card({ text, author, onNewQuoteClick, color }) {
 
       <span className="quote-card__author">{author}</span>
 
-      <div className="button-group quote-card__buttons">
-        <button className="button button-tweet" onClick={tweetClkHandle}>
+      <Button.ButtonGroup>
+        <Button variant="tweet" onClick={tweetClkHandle}>
           Tweet quote
-        </button>
-        <button className={`button button-primary ${color}`} onClick={onNewQuoteClick}>
+        </Button>
+        <Button variant="primary" onClick={onNewQuoteClick}>
           New quote
-        </button>
-      </div>
+        </Button>
+      </Button.ButtonGroup>
     </div>
   )
 }

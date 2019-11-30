@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getQuotes } from '../utils'
 import Card from './card/Card'
+import { Loading } from './Loading'
 
-export default function App(props) {
+export default function App() {
   const [quotes, setQuotes] = useState([])
   const [loading, setLoading] = useState(false)
   const [currentQuote, setCurrentQuote] = useState()
@@ -11,6 +12,7 @@ export default function App(props) {
     const onMount = async () => {
       try {
         setLoading(true)
+
         const quotes = await getQuotes()
         setQuotes(quotes.quotes)
         setCurrentQuote(quotes.quotes[0])
@@ -35,8 +37,4 @@ export default function App(props) {
   }
 
   return <Card text={quote} author={author} onNewQuoteClick={getRandomQuote} />
-}
-
-function Loading() {
-  return <h1>Loading...</h1>
 }

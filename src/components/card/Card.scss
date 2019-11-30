@@ -43,38 +43,3 @@
     }
   }
 }
-
-.button {
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
-
-  outline: 0;
-
-  transition: all linear 0.1s;
-
-  &.button-primary {
-    color: white;
-    background-color: var(--primary-color);
-  }
-
-  &.button-tweet {
-    --twitter-primary-color: #55acee;
-    --twitter-secondary-color: #f5f8fa;
-  
-    background-color: var(--card-bg-color);
-    
-    &:hover, &:focus {
-      color: var(--twitter-secondary-color);
-      background-color: var(--twitter-primary-color);
-    }
-  }
-}
-
-.button-group {
-  display: flex;
-
-  > .button {
-    flex: 1;
-  }
-}
