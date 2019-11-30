@@ -1,0 +1,80 @@
+.quote-card {
+  --card-border-radius: 0.4rem;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--card-bg-color);
+  opacity: 0.85;
+
+  border-radius: var(--card-border-radius);
+
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+
+  width: 55%;
+  min-width: 30vw;
+  min-height: 20vh;
+
+
+  &__text {
+    flex: 1;
+  }
+
+  &__author {
+    font-size: 0.85em;
+    font-style: italic;
+    text-align: right;
+  }
+
+  &__text,
+  &__author {
+    padding: 1em;
+  }
+
+  &__buttons {
+    font-size: large;
+
+    .button:first-child {
+      border-bottom-left-radius: var(--card-border-radius);
+    } 
+    
+    .button:last-child {
+        border-bottom-right-radius: var(--card-border-radius);
+    }
+  }
+}
+
+.button {
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+
+  outline: 0;
+
+  transition: all linear 0.1s;
+
+  &.button-primary {
+    color: white;
+    background-color: var(--primary-color);
+  }
+
+  &.button-tweet {
+    --twitter-primary-color: #55acee;
+    --twitter-secondary-color: #f5f8fa;
+  
+    background-color: var(--card-bg-color);
+    
+    &:hover, &:focus {
+      color: var(--twitter-secondary-color);
+      background-color: var(--twitter-primary-color);
+    }
+  }
+}
+
+.button-group {
+  display: flex;
+
+  > .button {
+    flex: 1;
+  }
+}

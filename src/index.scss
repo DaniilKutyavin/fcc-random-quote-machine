@@ -1,156 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Corben');
 
-body, html{
+body, html, #root{
   margin: 0;
   padding: 0;  
   height: 100%;
 }
 
+:root {
+  --card-bg-color: white;
+  --primary-color: blueviolet;
+}
 
-#app {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
+
+#root {
+  background-color: var(--primary-color);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
   transition: background-color 0.2s linear;
-  
+
   &, & * {
     font-family: Corben, sans-serif;
-  }
-}
-
-/* #app and #new-quote button background colors */
-.blueviolet {
-  background-color: blueviolet;
-}
-.chocolate {
-  background-color: chocolate;
-}
-.darkcyan {
-  background-color: darkcyan;
-}
-.forestgreen {
-  background-color: forestgreen;
-}
-.indianred {
-  background-color: indianred;
-}
-.indigo {
-  background-color: indigo;
-}
-.lightcoral {
-  background-color: lightcoral;
-}
-.mediumseagreen {
-  background-color: mediumseagreen;
-}
-.salmon {
-  background-color: salmon;
-}
-.sandybrown {
-  background-color: sandybrown;
-}
-.sienna {
-  background-color: sienna;
-}
-
-/* Quote box */
-
-#quote-box {
-  position: relative;
-  padding: auto;
-  /* phones only */
-  top: 20px;
-  min-height: 80%;
-
-  width: 35%;
-  min-width: 310px;
-  margin: auto;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 15px;
-  padding-bottom: 64px; /* #buttons height + #author font-size */
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
-}
-
-#text, 
-#author {
-  display: block;
-  width: 95%;
-  margin: auto;
-}
-
-#text {
-  font-size: 22px; /* phones only */
-}
-
-#quote-box #author {
-  font-size: 14px; /* phones only */
-  font-style: italic;
-  text-align: right;
-  margin-right: 30px;
-  position: absolute;
-  height: 14px; /* font-size */
-  bottom: 64px; /* #buttons height + this height */
-}
-
-#buttons {
-  position: absolute;
-  bottom: 0;
-  height: 50px;
-  width: 100%;
-}
-
-#buttons button {
-  height: 100%;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-}
-
-#new-quote {
-  color: white;
-  opacity: 0.8;
-  float: right;
-  border-bottom-right-radius: 15px;
-  text-shadow:
-    -1px -1px 0 #414A4C,
-    1px -1px 0 #414A4C,
-    -1px 1px 0 #414A4C,
-    1px 1px 0 #414A4C;
-  transition: opacity linear 0.1s;
-}
-
-#new-quote:focus, #new-quote:hover {
-  opacity: 1;
-}
-
-#tweet-quote {
-  background-color: rgba(255, 255, 255, 0); /* #quote-box border-color */
-  border-bottom-left-radius: 15px;
-  transition-property: color background-color;
-  transition-timing-function: linear;
-  transition-duration: 0.1s;
-}
-
-#tweet-quote:hover, #tweet-quote:focus {
-  color: #f5f8fa;
-  background-color: #55acee;
-}
-
-@media only screen and (min-width : 768px) {
-  #quote-box {
-    top: 15%;
-    min-height: 200px;
-    padding-bottom: 68px;
-  }
-  #text {
-    font-size: 26px;
-  }
-  #author {
-    font-size: 18px;
-    height: 18px;
   }
 }
