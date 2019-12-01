@@ -1,5 +1,5 @@
 .quote-card {
-  --card-border-radius: 0.4rem;
+  --card-border-radius: 10px;
 
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
     padding: 1em;
   }
 
-  &__buttons {
+  .button-group {
     font-size: large;
 
     .button:first-child {
