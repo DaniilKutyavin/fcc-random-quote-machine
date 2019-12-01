@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getQuotes } from '../utils'
 import Card from './card/Card'
-import { Loading } from './Loading'
+import Loader from './loader/Loader'
 
 export default function App() {
   const [quotes, setQuotes] = useState([])
@@ -13,7 +13,9 @@ export default function App() {
       try {
         setLoading(true)
 
-        const quotes = await getQuotes()
+        const ANIMATION_DURATION = 1200
+
+        const quotes = await getQuotesWithThrottle(ANIMATION_DURATION)
         setQuotes(quotes.quotes)
         setCurrentQuote(quotes.quotes[0])
       } catch (err) {
@@ -26,7 +28,7 @@ export default function App() {
     onMount()
   }, [])
 
-  if (loading) return <Loading />
+  if (loading) return <Loader size="8em" />
   if (!currentQuote) return null
 
   const { quote, author } = currentQuote
@@ -37,4 +39,10 @@ export default function App() {
   }
 
   return <Card text={quote} author={author} onNewQuoteClick={getRandomQuote} />
+}
+
+async function getQuotesWithThrottle(duration = 200) {
+  const throttlePromise = () => new Promise(resolve => setTimeout(resolve, duration))
+  const [quotes] = await Promise.all([getQuotes(), throttlePromise()])
+  return quotes
 }
