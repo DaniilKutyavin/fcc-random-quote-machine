@@ -6,7 +6,12 @@
   width: 72px;
   height: 72px;
 
-  .loader__circle {
+  &::before,
+  &::after {
+    content: '';
+
+    display: block;
+
     position: absolute;
 
     top: 50%;
@@ -18,7 +23,7 @@
     animation: beam var(--animation-duration) cubic-bezier(0, 0.2, 0.8, 1) infinite;
   }
 
-  .loader__circle--delayed {
+  &::after {
     animation-delay: calc(var(--animation-duration) / 2);
   }
 }
