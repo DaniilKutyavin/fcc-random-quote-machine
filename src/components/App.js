@@ -9,15 +9,15 @@ export default function App() {
   const [currentQuote, setCurrentQuote] = useState()
 
   useEffect(() => {
-    const onMount = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true)
 
         const ANIMATION_DURATION = 1200
+        const [quotes] = await Promise.all([getQuotes(), wait(ANIMATION_DURATION)])
 
-        const quotes = await getQuotesWithThrottle(ANIMATION_DURATION)
-        setQuotes(quotes.quotes)
-        setCurrentQuote(quotes.quotes[0])
+        setQuotes(quotes)
+        setCurrentQuote(quotes[0])
       } catch (err) {
         console.error(err)
       } finally {
@@ -25,24 +25,20 @@ export default function App() {
       }
     }
 
-    onMount()
+    fetchData()
   }, [])
 
   if (loading) return <Loader size="8em" />
   if (!currentQuote) return null
 
-  const { quote, author } = currentQuote
+  const { text, author } = currentQuote
 
   const getRandomQuote = () => {
     const newIndex = Math.floor(Math.random() * (quotes.length - 1))
     setCurrentQuote(quotes[newIndex])
   }
 
-  return <Card text={quote} author={author} onNewQuoteClick={getRandomQuote} />
+  return <Card text={text} author={author} onNewQuoteClick={getRandomQuote} />
 }
 
-async function getQuotesWithThrottle(duration = 200) {
-  const throttlePromise = () => new Promise(resolve => setTimeout(resolve, duration))
-  const [quotes] = await Promise.all([getQuotes(), throttlePromise()])
-  return quotes
-}
+const wait = duration => new Promise(resolve => setTimeout(resolve(), duration))
