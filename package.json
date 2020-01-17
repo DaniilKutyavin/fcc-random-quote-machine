@@ -2,7 +2,7 @@
   "name": "fcc-random-quote-machine",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://daniilkutyavin.github.io/fcc-random-quote-machine",
+  "homepage": "http://dkutyavin.github.io/fcc-random-quote-machine",
   "dependencies": {
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
