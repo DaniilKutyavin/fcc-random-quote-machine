@@ -14,19 +14,19 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
-
-      - run: yarn --ignore-engines
+      
+      - run:
+        name: "Predeploy"
+        command: |
+        yarn --ignore-engines
+        git config user.email "daniil.kutyavin94@gmail.com"
+        git config user.name "ci-deploy"
+        
+      
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run:
-          name: "Predeploy"
-          command: |
-            yarn predeploy
-            git config user.email "daniil.kutyavin94@gmail.com"
-            git config user.name "ci-deploy"
 
       - run:
           name: "Deploy on GH pages"
