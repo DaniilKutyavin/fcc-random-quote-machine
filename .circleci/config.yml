@@ -16,11 +16,11 @@ jobs:
             - v1-dependencies-
       
       - run:
-        name: "Predeploy"
-        command: |
-        yarn --ignore-engines
-        git config user.email "daniil.kutyavin94@gmail.com"
-        git config user.name "ci-deploy"
+          name: "Predeploy"
+          command: |
+            yarn --ignore-engines
+            git config user.email "daniil.kutyavin94@gmail.com"
+            git config user.name "ci-deploy"
         
       
       - save_cache:
