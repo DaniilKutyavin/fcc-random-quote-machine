@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  predeploy:
+    docker:
+      - image: circleci/node:10
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: yarn --ignore-engines
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: yarn predeploy
+
+  deploy:
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: yarn --ignore-engines
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: "Deploy on GH pages"
+          command: yarn deploy
+
+workflows:
+  version: 2
+  push:
+    jobs:
+      - predeploy
+      - deploy:
+          requires:
+            - predeploy
