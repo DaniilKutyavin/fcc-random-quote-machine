@@ -31,12 +31,3 @@ jobs:
       - run:
           name: "Deploy on GH pages"
           command: yarn deploy
-
-workflows:
-  version: 2
-  main:
-    jobs:
-      - build:
-        filters:
-          branches:
-            only: master
