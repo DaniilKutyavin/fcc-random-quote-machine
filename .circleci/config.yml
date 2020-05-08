@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: "Predeploy"
-          command: yarn predeploy
+          command: yarn predeploy & git config user.email daniil.kutyavin94@gmail.com & git config user.name Circl CI deploy
 
       - run:
           name: "Deploy on GH pages"
