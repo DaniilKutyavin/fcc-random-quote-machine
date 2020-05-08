@@ -1,5 +1,4 @@
-version: 2.1
-
+version: 2
 jobs:
   build:
     docker:
@@ -7,37 +6,38 @@ jobs:
 
     steps:
       - add_ssh_keys:
-          fingerprints:
-            - "21:4b:c0:6b:d2:16:cb:37:30:1d:98:4e:6a:83:03:3a"
+        fingerprints:
+          - "21:4b:c0:6b:d2:16:cb:37:30:1d:98:4e:6a:83:03:3a"
+
       - checkout
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+        keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
       
       - run:
-          name: "Predeploy"
-          command: |
-            yarn --ignore-engines
-            git config user.email "daniil.kutyavin94@gmail.com"
-            git config user.name "ci-deploy"
+        name: "Predeploy"
+        command: |
+          yarn --ignore-engines
+          git config user.email "daniil.kutyavin94@gmail.com"
+          git config user.name "ci-deploy"
         
       
       - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: "Deploy on GH pages"
-          command: yarn deploy
+        name: "Deploy on GH pages"
+        command: yarn deploy
 
 workflows:
-    version: 2
-    build:
-        jobs:
-            - build:
-                filters:
-                    branches:
-                        only: 
-                            - master
+  version: 2
+  main:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only: 
+              - master
