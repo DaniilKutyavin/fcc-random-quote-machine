@@ -2,10 +2,6 @@ version: 2.1
 
 jobs:
   build:
-    branches:
-      only:
-        - master
-
     docker:
       - image: circleci/node:10
 
@@ -35,3 +31,12 @@ jobs:
       - run:
           name: "Deploy on GH pages"
           command: yarn deploy
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only: master
